@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studio CMS & Content Atelier | Valenti & Co. Architectural Interiors</title>
+  
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --admin-bg: #0b0c0f;
+      --admin-sidebar: #111318;
+      --admin-card: #171a21;
+      --admin-card-hover: #1e222c;
+      --admin-border: rgba(255, 255, 255, 0.09);
+      --admin-gold: #c5a880;
+      --admin-gold-light: #e0cca9;
+      --admin-gold-glow: rgba(197, 168, 128, 0.22);
+      --admin-gold-subtle: rgba(197, 168, 128, 0.08);
+      --admin-text: #f5f6f8;
+      --admin-text-muted: #8c92a0;
+      --admin-success: #52c41a;
+      --admin-warning: #faad14;
+      --admin-error: #ff4d4f;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+      --font-display: 'Syne', sans-serif;
+      --font-serif: 'Cormorant Garamond', serif;
+    }
+
+    html[data-theme="golden"], body[data-theme="golden"] {
+      --admin-bg: #0b0c0f;
+      --admin-sidebar: #111318;
+      --admin-card: #171a21;
+      --admin-card-hover: #1e222c;
+      --admin-border: rgba(255, 255, 255, 0.09);
+      --admin-gold: #c5a880;
+      --admin-text: #f5f6f8;
+    }
+
+    html[data-theme="dusk"], body[data-theme="dusk"] {
+      --admin-bg: #06080f;
+      --admin-sidebar: #0d101d;
+      --admin-card: #13182b;
+      --admin-card-hover: #1c233e;
+      --admin-border: rgba(255, 255, 255, 0.09);
+      --admin-gold: #7097d1;
+      --admin-text: #f0f4fd;
+    }
+
+    html[data-theme="noon"], body[data-theme="noon"] {
+      --admin-bg: #f6f5f0;
+      --admin-sidebar: #eae8e1;
+      --admin-card: #ffffff;
+      --admin-card-hover: #f1efea;
+      --admin-border: rgba(0, 0, 0, 0.09);
+      --admin-gold: #b3884d;
+      --admin-text: #121418;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--admin-bg);
+      color: var(--admin-text);
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Auth Overlay */
+    .auth-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(7, 8, 11, 0.95);
+      backdrop-filter: blur(20px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      transition: opacity 0.4s ease;
+    }
+
+    .auth-card {
+      background: var(--admin-card);
+      border: 1px solid var(--admin-gold);
+      border-radius: var(--radius-md);
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 440px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+      text-align: center;
+      position: relative;
+    }
+
+    .auth-close-btn {
+      position: absolute;
+      top: 1.1rem;
+      right: 1.1rem;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--admin-border);
+      color: var(--admin-text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease;
+      text-decoration: none;
+      z-index: 10;
+    }
+
+    .auth-close-btn:hover {
+      background: var(--admin-gold);
+      color: #0c0d10;
+      border-color: var(--admin-gold);
+      transform: scale(1.08);
+    }
+
+    .auth-logo {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--admin-text);
+      margin-bottom: 0.25rem;
+    }
+
+    .auth-logo span { color: var(--admin-gold); }
+
+    .auth-sub {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      color: var(--admin-text-muted);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .auth-demo-badge {
+      background: var(--admin-gold-subtle);
+      border: 1px dashed var(--admin-gold);
+      border-radius: var(--radius-sm);
+      padding: 0.85rem;
+      font-size: 0.78rem;
+      color: var(--admin-gold-light);
+      margin-bottom: 1.5rem;
+      text-align: left;
+    }
+
+    .auth-form-group {
+      margin-bottom: 1.25rem;
+      text-align: left;
+    }
+
+    .auth-label {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--admin-text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .auth-input {
+      width: 100%;
+      background: var(--admin-bg);
+      border: 1px solid var(--admin-border);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 1rem;
+      color: #fff;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .auth-input:focus {
+      border-color: var(--admin-gold);
+    }
+
+    /* Buttons */
+    .btn-admin {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.4rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border: none;
+      text-decoration: none;
+    }
+
+    .btn-admin-gold {
+      background: var(--admin-gold);
+      color: #0b0c0f;
+    }
+    .btn-admin-gold:hover {
+      background: #e0cca9;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px var(--admin-gold-glow);
+    }
+
+    .btn-admin-ghost {
+      background: transparent;
+      border: 1px solid var(--admin-border);
+      color: var(--admin-text);
+    }
+    .btn-admin-ghost:hover {
+      border-color: var(--admin-gold);
+      color: var(--admin-gold);
+    }
+
+    .btn-admin-danger {
+      background: rgba(255, 77, 79, 0.12);
+      border: 1px solid rgba(255, 77, 79, 0.35);
+      color: var(--admin-error);
+    }
+    .btn-admin-danger:hover {
+      background: var(--admin-error);
+      color: #fff;
+    }
+
+    /* Sidebar Navigation */
+    .admin-sidebar {
+      width: 270px;
+      background: var(--admin-sidebar);
+      border-right: 1px solid var(--admin-border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+    }
+
+    .sidebar-brand {
+      padding: 2rem 1.5rem;
+      border-bottom: 1px solid var(--admin-border);
+    }
+
+    .sidebar-brand-name {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--admin-text);
+    }
+    .sidebar-brand-name span { color: var(--admin-gold); }
+
+    .sidebar-brand-sub {
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--admin-text-muted);
+      margin-top: 4px;
+    }
+
+    .sidebar-nav {
+      padding: 1.25rem 0.85rem;
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      color: var(--admin-text-muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .nav-item:hover {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--admin-text);
+    }
+
+    .nav-item.active {
+      background: var(--admin-gold-subtle);
+      color: var(--admin-gold);
+      border: 1px solid var(--admin-gold-glow);
+      font-weight: 600;
+    }
+
+    .nav-badge {
+      margin-left: auto;
+      background: var(--admin-gold);
+      color: #0c0d10;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 999px;
+    }
+
+    .sidebar-footer {
+      padding: 1.25rem 1.5rem;
+      border-top: 1px solid var(--admin-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .user-info h5 { font-size: 0.85rem; color: var(--admin-text); font-weight: 600; }
+    .user-info p { font-size: 0.7rem; color: var(--admin-text-muted); }
+
+    .logout-btn {
+      background: none;
+      border: none;
+      color: var(--admin-error);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* Main View Area */
+    .admin-main {
+      margin-left: 270px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .admin-topbar {
+      height: 74px;
+      padding-inline: 2.2rem;
+      border-bottom: 1px solid var(--admin-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--admin-sidebar);
+      position: sticky;
+      top: 0;
+      z-index: 90;
+    }
+
+    .topbar-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--admin-text);
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .admin-content {
+      padding: 2.2rem;
+      flex: 1;
+    }
+
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; animation: fadeIn 0.3s ease; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* KPI Cards Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .kpi-card {
+      background: var(--admin-card);
+      border: 1px solid var(--admin-border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+
+    .kpi-label { font-size: 0.75rem; text-transform: uppercase; color: var(--admin-text-muted); letter-spacing: 0.08em; }
+    .kpi-value { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--admin-text); margin-block: 0.3rem; }
+    .kpi-trend { font-size: 0.75rem; color: var(--admin-gold); }
+
+    /* Tables & CMS Forms */
+    .admin-table-wrap {
+      background: var(--admin-card);
+      border: 1px solid var(--admin-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    .table-header-bar {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--admin-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .table-title { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: var(--admin-text); }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.85rem;
+    }
+
+    th {
+      background: rgba(255,255,255,0.02);
+      padding: 0.85rem 1.25rem;
+      color: var(--admin-text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      border-bottom: 1px solid var(--admin-border);
+    }
+
+    td {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--admin-border);
+      color: var(--admin-text);
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+
+    .badge-status {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .status-new { background: rgba(82, 196, 26, 0.15); color: var(--admin-success); border: 1px solid var(--admin-success); }
+    .status-contacted { background: rgba(250, 173, 20, 0.15); color: var(--admin-warning); border: 1px solid var(--admin-warning); }
+
+    /* CMS Panels & Cards */
+    .cms-panel-card {
+      background: var(--admin-card);
+      border: 1px solid var(--admin-border);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .cms-section-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--admin-text);
+      margin-bottom: 0.4rem;
+    }
+
+    .cms-section-desc {
+      font-size: 0.82rem;
+      color: var(--admin-text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .cms-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .col-full { grid-column: span 2; }
+
+    .cms-group { display: flex; flex-direction: column; gap: 0.4rem; }
+
+    .cms-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--admin-text-muted);
+      font-weight: 600;
+    }
+
+    .cms-input, .cms-textarea, .cms-select {
+      background: var(--admin-bg);
+      border: 1px solid var(--admin-border);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 1rem;
+      color: #fff;
+      font-size: 0.88rem;
+      font-family: var(--font-sans);
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .cms-input:focus, .cms-textarea:focus, .cms-select:focus {
+      border-color: var(--admin-gold);
+    }
+
+    .cms-textarea { min-height: 90px; resize: vertical; }
+
+    /* Project CMS Cards with Thumbnails & Delete Controls */
+    .project-cms-card {
+      background: var(--admin-bg);
+      border: 1px solid var(--admin-border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .project-thumb-wrap {
+      width: 100%;
+      height: 130px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      border: 1px solid var(--admin-border);
+      background: #000;
+      position: relative;
+    }
+
+    .project-thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Toast Notification */
+    .admin-toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--admin-card);
+      border: 1px solid var(--admin-gold);
+      border-radius: var(--radius-sm);
+      padding: 0.85rem 1.4rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--admin-text);
+      z-index: 10000;
+      transform: translateY(100px);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .admin-toast.show {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Mood Switcher Dropdown in Admin Header */
+    .mood-switcher-container { position: relative; }
+    .mood-toggle-btn {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--admin-card);
+      border: 1px solid var(--admin-border);
+      cursor: pointer;
+    }
+    .mood-toggle-btn span {
+      width: 16px;
+      height: 2px;
+      background: var(--admin-gold);
+      border-radius: 2px;
+    }
+    .mood-switcher {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      background: var(--admin-card);
+      border: 1px solid var(--admin-gold);
+      border-radius: var(--radius-sm);
+      padding: 6px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition: all 0.25s ease;
+      z-index: 1000;
+      min-width: 140px;
+    }
+    .mood-switcher.open { opacity: 1; visibility: visible; transform: translateY(0); }
+    .mood-btn {
+      padding: 6px 10px;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      color: var(--admin-text-muted);
+      border: none;
+      background: none;
+      text-align: left;
+      cursor: pointer;
+    }
+    .mood-btn:hover { background: rgba(255,255,255,0.05); color: #fff; }
+    .mood-btn.active { color: var(--admin-gold); font-weight: 600; background: var(--admin-gold-subtle); }
+
+    .admin-mobile-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-sm);
+      background: var(--admin-card);
+      border: 1px solid var(--admin-border);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .admin-mobile-toggle span {
+      width: 18px;
+      height: 2px;
+      background: var(--admin-gold);
+      border-radius: 2px;
+      transition: all 0.25s ease;
+    }
+
+    .sidebar-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 1500;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar-backdrop.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    @media (max-width: 900px) {
+      .admin-mobile-toggle { display: flex; }
+      .admin-sidebar {
+        width: 280px;
+        transform: translateX(-100%);
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 2000;
+        box-shadow: 10px 0 35px rgba(0, 0, 0, 0.7);
+      }
+      .admin-sidebar.open {
+        transform: translateX(0);
+      }
+      .admin-main {
+        margin-left: 0;
+      }
+      .admin-topbar {
+        padding-inline: 1.1rem;
+      }
+      .admin-content {
+        padding: 1.1rem;
+      }
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.85rem;
+      }
+      .cms-panel-card {
+        padding: 1.25rem;
+      }
+      .cms-grid {
+        grid-template-columns: 1fr;
+      }
+      .col-full {
+        grid-column: span 1;
+      }
+      .project-cms-card {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      .project-thumb-wrap {
+        height: 180px;
+      }
+      .table-header-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+    }
+
+    @media (max-width: 550px) {
+      .kpi-grid {
+        grid-template-columns: 1fr;
+      }
+      .topbar-title {
+        font-size: 1.05rem;
+      }
+      .topbar-actions .btn-admin span:not(:first-child) {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- AUTHENTICATION OVERLAY -->
+  <div class="auth-overlay" id="auth-overlay">
+    <div class="auth-card">
+      <a href="index.html" class="auth-close-btn" title="Close & Return to Website" aria-label="Close modal and return to website">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </a>
+
+      <div class="auth-logo">VALENTI <span>&</span> CO.</div>
+      <div class="auth-sub">Private Atelier CMS & Leads Portal</div>
+
+      <div class="auth-demo-badge">
+        <strong>Demo Credentials:</strong><br>
+        Email: <code>admin@valenti.design</code><br>
+        Password: <code>luxury2026</code>
+      </div>
+
+      <form id="auth-form">
+        <div class="auth-form-group">
+          <label for="login-email" class="auth-label">Email Address</label>
+          <input type="email" id="login-email" class="auth-input" value="admin@valenti.design" required>
+        </div>
+
+        <div class="auth-form-group">
+          <label for="login-password" class="auth-label">Password</label>
+          <input type="password" id="login-password" class="auth-input" value="luxury2026" required>
+        </div>
+
+        <button type="submit" class="btn-admin btn-admin-gold" style="width: 100%;">Enter Atelier Portal</button>
+
+        <a href="index.html" class="btn-admin btn-admin-ghost" style="width: 100%; margin-top: 0.75rem;">
+          ← Return to Live Website
+        </a>
+      </form>
+    </div>
+  </div>
+
+  <!-- SIDEBAR NAVIGATION -->
+  <aside class="admin-sidebar">
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-name">VALENTI <span>CMS</span></div>
+      <div class="sidebar-brand-sub">Spatial Content Studio</div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="nav-item active" data-tab="overview">
+        <span>📊</span> <span>Overview</span>
+      </a>
+      <a class="nav-item" data-tab="inquiries">
+        <span>📬</span> <span>Inquiries</span>
+        <span class="nav-badge" id="sidebar-badge">0</span>
+      </a>
+      <a class="nav-item" data-tab="hero">
+        <span>🏛️</span> <span>Hero Section</span>
+      </a>
+      <a class="nav-item" data-tab="services">
+        <span>📐</span> <span>Services</span>
+      </a>
+      <a class="nav-item" data-tab="portfolio">
+        <span>🖼️</span> <span>Portfolio & Images</span>
+      </a>
+      <a class="nav-item" data-tab="studio">
+        <span>📍</span> <span>Studio Info</span>
+      </a>
+      <a class="nav-item" data-tab="settings">
+        <span>⚙️</span> <span>Backup & Tools</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-info">
+        <h5>Elena Valenti</h5>
+        <p>Lead Architect</p>
+      </div>
+      <button type="button" class="logout-btn" id="logout-btn" title="Sign Out">Sign Out</button>
+    </div>
+  </aside>
+
+  <!-- SIDEBAR BACKDROP FOR MOBILE -->
+  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+  <!-- MAIN DASHBOARD -->
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <div style="display: flex; align-items: center; gap: 0.85rem;">
+        <button type="button" class="admin-mobile-toggle" id="admin-mobile-toggle" aria-label="Toggle Admin Navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div class="topbar-title" id="tab-heading">Dashboard Overview</div>
+      </div>
+      <div class="topbar-actions">
+        <div class="mood-switcher-container">
+          <button type="button" class="mood-toggle-btn" id="mood-toggle-btn" aria-label="Toggle Theme Menu" aria-expanded="false" title="Theme Options">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <div class="mood-switcher" id="mood-switcher-menu" title="Change Theme Atmosphere" role="group" aria-label="Theme Atmosphere">
+            <button type="button" class="mood-btn active" data-mood="golden" aria-pressed="true">
+              <span>☀️</span> Golden
+            </button>
+            <button type="button" class="mood-btn" data-mood="dusk" aria-pressed="false">
+              <span>🌙</span> Dusk
+            </button>
+            <button type="button" class="mood-btn" data-mood="noon" aria-pressed="false">
+              <span>⛅</span> High Noon
+            </button>
+          </div>
+        </div>
+
+        <a href="index.html" target="_blank" class="btn-admin btn-admin-ghost">
+          <span>↗</span> View Live Site
+        </a>
+      </div>
+    </header>
+
+    <div class="admin-content">
+      <!-- TAB: OVERVIEW -->
+      <section class="tab-pane active" id="pane-overview">
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <span class="kpi-label">Total Inquiries</span>
+            <span class="kpi-value" id="kpi-inquiries">0</span>
+            <span class="kpi-trend">Live Leads Tracker</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Active Portfolio Projects</span>
+            <span class="kpi-value" id="kpi-projects">4</span>
+            <span class="kpi-trend">Live Site Portfolio Cards</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Bespoke Services</span>
+            <span class="kpi-value" id="kpi-services">3</span>
+            <span class="kpi-trend">Architectural Disciplines</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Live Sync Status</span>
+            <span class="kpi-value" style="color: var(--admin-success);">100% Active</span>
+            <span class="kpi-trend">Instant Real-Time Reflection</span>
+          </div>
+        </div>
+
+        <div class="admin-table-wrap">
+          <div class="table-header-bar">
+            <div class="table-title">Recent Client Inquiries</div>
+            <button type="button" class="btn-admin btn-admin-ghost" onclick="switchTab('inquiries')">View All Inquiries</button>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Client Name</th>
+                <th>Typology</th>
+                <th>Budget Bracket</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="overview-inquiries-table">
+              <tr>
+                <td colspan="5" style="text-align: center; color: var(--admin-text-muted);">No inquiries logged yet. Submissions on website appear here instantly.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- TAB: INQUIRIES & LEADS -->
+      <section class="tab-pane" id="pane-inquiries">
+        <div class="admin-table-wrap">
+          <div class="table-header-bar">
+            <div>
+              <div class="table-title">Client Consultation Leads</div>
+              <p style="font-size: 0.78rem; color: var(--admin-text-muted); margin-top: 3px;">
+                Requests submitted via consultation form on index.html and consultation.html.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.75rem;">
+              <button type="button" class="btn-admin btn-admin-ghost" id="export-csv-btn">
+                <span>↓</span> Export Leads (CSV)
+              </button>
+              <button type="button" class="btn-admin btn-admin-danger" id="clear-leads-btn">
+                Clear All
+              </button>
+            </div>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Client Name</th>
+                <th>Email & Phone</th>
+                <th>Project Scope</th>
+                <th>Location</th>
+                <th>Budget</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="full-inquiries-table">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- TAB: HERO CMS -->
+      <section class="tab-pane" id="pane-hero">
+        <div class="cms-panel-card">
+          <h3 class="cms-section-title">Hero Section Text & Credibility Metrics</h3>
+          <p class="cms-section-desc">Edit the text, narrative, and statistics ticker displayed in the hero section of index.html. Changes update the live website immediately.</p>
+
+          <form id="hero-cms-form">
+            <div class="cms-grid">
+              <div class="cms-group col-full">
+                <label for="cms-hero-eyebrow" class="cms-label">Eyebrow Badge Text</label>
+                <input type="text" id="cms-hero-eyebrow" class="cms-input" required>
+              </div>
+
+              <div class="cms-group col-full">
+                <label for="cms-hero-title" class="cms-label">Main Heading (HTML supported, e.g. &lt;em&gt;Living Art.&lt;/em&gt;)</label>
+                <input type="text" id="cms-hero-title" class="cms-input" required>
+              </div>
+
+              <div class="cms-group col-full">
+                <label for="cms-hero-desc" class="cms-label">Hero Narrative Paragraph</label>
+                <textarea id="cms-hero-desc" class="cms-textarea" required></textarea>
+              </div>
+
+              <div class="cms-group">
+                <label for="cms-hero-cta1" class="cms-label">Primary Button Label</label>
+                <input type="text" id="cms-hero-cta1" class="cms-input" required>
+              </div>
+
+              <div class="cms-group">
+                <label for="cms-hero-cta2" class="cms-label">Secondary Button Label</label>
+                <input type="text" id="cms-hero-cta2" class="cms-input" required>
+              </div>
+            </div>
+
+            <h4 style="font-size: 0.88rem; margin-block: 1.25rem 0.85rem; color: var(--admin-gold); text-transform: uppercase; letter-spacing: 0.08em;">Credibility Statistics Bar</h4>
+            <div class="cms-grid" id="cms-stats-grid">
+              <!-- Injected dynamically -->
+            </div>
+
+            <button type="submit" class="btn-admin btn-admin-gold" style="margin-top: 1rem;">Save & Publish Hero Text</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- TAB: SERVICES CMS -->
+      <section class="tab-pane" id="pane-services">
+        <div class="cms-panel-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <div>
+              <h3 class="cms-section-title">Bespoke Architectural Services</h3>
+              <p class="cms-section-desc">Add, edit, or remove services displayed on index.html and services.html.</p>
+            </div>
+            <button type="button" class="btn-admin btn-admin-gold" id="add-service-btn">
+              <span>+</span> Add New Service
+            </button>
+          </div>
+
+          <div id="services-cms-list">
+            <!-- Services injected dynamically -->
+          </div>
+
+          <button type="button" class="btn-admin btn-admin-gold" id="save-services-btn" style="margin-top: 1rem;">Save All Services Changes</button>
+        </div>
+      </section>
+
+      <!-- TAB: PORTFOLIO & IMAGES CMS -->
+      <section class="tab-pane" id="pane-portfolio">
+        <div class="cms-panel-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+            <div>
+              <h3 class="cms-section-title">Portfolio Projects & Image Gallery Curation</h3>
+              <p class="cms-section-desc">Manage project images, titles, locations, categories, and case studies. Delete unwanted images/projects or add new luxury commissions.</p>
+            </div>
+            <button type="button" class="btn-admin btn-admin-gold" id="add-project-btn">
+              <span>+</span> Add New Project & Image
+            </button>
+          </div>
+
+          <div id="portfolio-cms-list">
+            <!-- Portfolio projects & images list injected dynamically with thumbnail previews & delete buttons -->
+          </div>
+
+          <button type="button" class="btn-admin btn-admin-gold" id="save-portfolio-btn" style="margin-top: 1rem;">Save Portfolio & Image Changes</button>
+        </div>
+      </section>
+
+      <!-- TAB: STUDIO INFO -->
+      <section class="tab-pane" id="pane-studio">
+        <div class="cms-panel-card">
+          <h3 class="cms-section-title">Global Studio Coordinates & Concierge Contact</h3>
+          <p class="cms-section-desc">Official location addresses and client concierge channels.</p>
+
+          <div class="cms-grid">
+            <div class="cms-group">
+              <label class="cms-label">New York Flagship Atelier</label>
+              <input type="text" class="cms-input" value="740 Fifth Avenue, 18th Floor, New York, NY 10019" readonly>
+            </div>
+            <div class="cms-group">
+              <label class="cms-label">Paris Atelier</label>
+              <input type="text" class="cms-input" value="28 Rue du Faubourg Saint-Honoré, 75008 Paris, France" readonly>
+            </div>
+            <div class="cms-group">
+              <label class="cms-label">Concierge Telephone</label>
+              <input type="text" class="cms-input" value="+1 (212) 555-0198" readonly>
+            </div>
+            <div class="cms-group">
+              <label class="cms-label">Client Inquiry Email</label>
+              <input type="text" class="cms-input" value="concierge@valenti.design" readonly>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB: BACKUP & TOOLS -->
+      <section class="tab-pane" id="pane-settings">
+        <div class="cms-panel-card">
+          <h3 class="cms-section-title">Database Export & System Restoration</h3>
+          <p class="cms-section-desc">Export full website content database to JSON or restore studio defaults.</p>
+
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;">
+            <button type="button" class="btn-admin btn-admin-gold" id="export-json-btn">
+              Export Database (.JSON)
+            </button>
+            <button type="button" class="btn-admin btn-admin-danger" id="reset-defaults-btn">
+              Reset to Factory Defaults
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- ADD PROJECT MODAL -->
+  <div class="auth-overlay" id="add-project-modal" style="display: none;">
+    <div class="auth-card" style="max-width: 650px; text-align: left;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+        <h3 style="font-family: var(--font-display); font-size: 1.2rem; color: #fff;">Add New Project & Image</h3>
+        <button type="button" class="btn-admin btn-admin-ghost" onclick="closeAddProjectModal()" style="padding: 0.3rem 0.6rem;">×</button>
+      </div>
+
+      <form id="add-project-form">
+        <div class="cms-grid">
+          <div class="cms-group">
+            <label class="cms-label">Project Title</label>
+            <input type="text" id="new-proj-title" class="cms-input" placeholder="e.g. The Soho Penthouse Sanctuary" required>
+          </div>
+
+          <div class="cms-group">
+            <label class="cms-label">Category</label>
+            <select id="new-proj-category" class="cms-select" required>
+              <option value="penthouse">Penthouse</option>
+              <option value="villa">Coastal Villa</option>
+              <option value="townhouse">Townhouse</option>
+              <option value="hospitality">Hospitality</option>
+            </select>
+          </div>
+
+          <div class="cms-group">
+            <label class="cms-label">Badge Tag (e.g. Penthouse • 4,800 sq ft)</label>
+            <input type="text" id="new-proj-badge" class="cms-input" placeholder="e.g. Penthouse • 4,800 sq ft" required>
+          </div>
+
+          <div class="cms-group">
+            <label class="cms-label">Location / Year</label>
+            <input type="text" id="new-proj-loc" class="cms-input" placeholder="e.g. Soho, New York City • 2026" required>
+          </div>
+
+          <div class="cms-group col-full">
+            <label class="cms-label">Image Source / Preset Selection</label>
+            <select id="new-proj-preset-img" class="cms-select" onchange="document.getElementById('new-proj-image').value = this.value">
+              <option value="assets/images/hero-penthouse.jpg">Preset: Tribeca Sky Residence (Penthouse)</option>
+              <option value="assets/images/project-villa.jpg">Preset: Villa Cala Di Luna (Coastal Villa)</option>
+              <option value="assets/images/project-townhouse.jpg">Preset: Hôtel Particulier (Paris Townhouse)</option>
+              <option value="assets/images/project-hospitality.jpg">Preset: L'Ambre Noir Club (Hospitality)</option>
+              <option value="assets/images/hero-slide-1.jpg">Preset: Slide 1 (Manhattan Suite)</option>
+              <option value="assets/images/hero-slide-2.jpg">Preset: Slide 2 (Mallorca Estate)</option>
+              <option value="assets/images/hero-slide-3.jpg">Preset: Slide 3 (Paris Salon)</option>
+            </select>
+            <input type="text" id="new-proj-image" class="cms-input" value="assets/images/hero-penthouse.jpg" style="margin-top: 6px;" placeholder="Image URL (e.g. assets/images/hero-penthouse.jpg)" required>
+          </div>
+
+          <div class="cms-group col-full">
+            <label class="cms-label">Client & Scope Details</label>
+            <input type="text" id="new-proj-scope" class="cms-input" placeholder="e.g. Full gut renovation, custom travertine fireplace, gallery lighting" required>
+          </div>
+
+          <div class="cms-group col-full">
+            <label class="cms-label">Material Curation</label>
+            <input type="text" id="new-proj-materials" class="cms-input" placeholder="e.g. Navona Travertine, Smoked Walnut, Aged Brass" required>
+          </div>
+
+          <div class="cms-group col-full">
+            <label class="cms-label">Client Testimonial Quote</label>
+            <textarea id="new-proj-quote" class="cms-textarea" placeholder="e.g. The spatial flow and quiet luxury surpassed our highest expectations." required></textarea>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1rem;">
+          <button type="button" class="btn-admin btn-admin-ghost" onclick="closeAddProjectModal()">Cancel</button>
+          <button type="submit" class="btn-admin btn-admin-gold">Add Project & Publish Live</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- LEAD DETAIL MODAL -->
+  <div class="auth-overlay" id="lead-modal" style="display: none;">
+    <div class="auth-card" style="max-width: 600px; text-align: left;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem;">
+        <div>
+          <h3 style="color: #fff; font-size: 1.25rem;" id="modal-lead-name">Client Name</h3>
+          <p style="font-size: 0.8rem; color: var(--admin-gold);" id="modal-lead-meta">Date • Time</p>
+        </div>
+        <button type="button" class="btn-admin btn-admin-ghost" onclick="closeLeadModal()" style="padding: 0.4rem 0.8rem;">×</button>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; font-size: 0.85rem;">
+        <div><strong>Email:</strong> <span id="modal-lead-email" style="color: var(--admin-text-muted);"></span></div>
+        <div><strong>Phone:</strong> <span id="modal-lead-phone" style="color: var(--admin-text-muted);"></span></div>
+        <div><strong>Typology:</strong> <span id="modal-lead-type" style="color: var(--admin-text-muted);"></span></div>
+        <div><strong>Budget:</strong> <span id="modal-lead-budget" style="color: var(--admin-text-muted);"></span></div>
+        <div><strong>Location:</strong> <span id="modal-lead-loc" style="color: var(--admin-text-muted);"></span></div>
+      </div>
+
+      <div style="margin-bottom: 1.5rem;">
+        <strong style="display: block; font-size: 0.75rem; text-transform: uppercase; color: var(--admin-text-muted); margin-bottom: 0.5rem;">Design Aspirations & Notes:</strong>
+        <p id="modal-lead-message" style="background: #0f1116; padding: 1rem; border-radius: 6px; border: 1px solid var(--admin-border); font-size: 0.85rem; color: #fff; line-height: 1.6;"></p>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 0.75rem;">
+        <button type="button" class="btn-admin btn-admin-ghost" onclick="closeLeadModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="admin-toast" id="admin-toast">
+    <span style="color: var(--admin-gold);">✓</span>
+    <span id="admin-toast-text">Action completed</span>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curated Portfolio of Private Works | Valenti & Co.</title>
+  <meta name="description" content="Explore selected commissions by Valenti & Co. Luxury penthouses in Tribeca, coastal villas in Mallorca, Haussmann townhouses in Paris, and Mayfair hospitality.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Ambient Gold Scroll Progress Bar -->
+  <div class="scroll-progress-bar" id="scroll-progress-bar" aria-hidden="true"></div>
+
+  <!-- Accessible Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header / Navigation -->
+  <header class="header" id="site-header">
+    <div class="container header-inner">
+      <!-- Brand Logo -->
+      <div class="brand-logo">
+        <a href="index.html" class="brand-name">VALENTI <span>&</span> CO.</a>
+        <div class="brand-tagline">Architectural Interiors</div>
+      </div>
+
+      <!-- Desktop Nav -->
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="philosophy.html" class="nav-link">Philosophy</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="transformation.html" class="nav-link">Transformation</a>
+        <a href="portfolio.html" class="nav-link active">Portfolio</a>
+        <a href="methodology.html" class="nav-link">Methodology</a>
+        <a href="estimator.html" class="nav-link">Estimator</a>
+        <a href="faq.html" class="nav-link">FAQ</a>
+      </nav>
+
+      <!-- Header Actions -->
+      <div class="header-actions">
+        <!-- 3D Lighting Atmosphere Selector (Opens via 3 Parallel Lines Toggle Button) -->
+        <div class="mood-switcher-container">
+          <button type="button" class="mood-toggle-btn" id="mood-toggle-btn" aria-label="Toggle Lighting Atmosphere Menu" aria-expanded="false" title="Lighting Atmosphere Options">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <div class="mood-switcher" id="mood-switcher-menu" title="Change Theme Atmosphere" role="group" aria-label="Theme Atmosphere">
+            <button type="button" class="mood-btn active" data-mood="golden" aria-pressed="true">
+              <span>☀️</span> Golden (Day)
+            </button>
+            <button type="button" class="mood-btn" data-mood="dusk" aria-pressed="false">
+              <span>🌙</span> Dusk (Night)
+            </button>
+            <button type="button" class="mood-btn" data-mood="noon" aria-pressed="false">
+              <span>⛅</span> High Noon
+            </button>
+          </div>
+        </div>
+
+        <a href="consultation.html" class="btn btn-gold btn-sm">Book Consultation</a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button type="button" class="mobile-toggle" id="mobile-toggle" aria-label="Open Navigation Menu" aria-expanded="false" aria-controls="mobile-drawer">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+    <div class="mobile-drawer-header">
+      <div class="mobile-drawer-brand">
+        <a href="index.html" class="brand-name">VALENTI <span>&</span> CO.</a>
+        <div class="brand-tagline">Architectural Interiors</div>
+      </div>
+      <button type="button" class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Close Navigation Menu" title="Close Menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <nav class="mobile-nav-links" aria-label="Mobile Navigation">
+      <a href="index.html" class="mobile-nav-link">Home</a>
+      <a href="philosophy.html" class="mobile-nav-link">Philosophy</a>
+      <a href="services.html" class="mobile-nav-link">Services</a>
+      <a href="transformation.html" class="mobile-nav-link">Transformation</a>
+      <a href="portfolio.html" class="mobile-nav-link active">Portfolio</a>
+      <a href="methodology.html" class="mobile-nav-link">Methodology</a>
+      <a href="estimator.html" class="mobile-nav-link">Estimator</a>
+      <a href="faq.html" class="mobile-nav-link">FAQ</a>
+      <a href="consultation.html" class="mobile-nav-link text-gold highlight">Schedule Consultation</a>
+    </nav>
+
+    <div class="mobile-drawer-footer">
+      <div class="mobile-theme-switcher">
+        <p class="mobile-theme-title">Theme Atmosphere</p>
+        <div class="mood-switcher-mobile">
+          <button type="button" class="mood-btn active" data-mood="golden" aria-pressed="true">
+            <span>☀️</span> Golden (Day)
+          </button>
+          <button type="button" class="mood-btn" data-mood="dusk" aria-pressed="false">
+            <span>🌙</span> Dusk (Night)
+          </button>
+          <button type="button" class="mood-btn" data-mood="noon" aria-pressed="false">
+            <span>⛅</span> High Noon
+          </button>
+        </div>
+      </div>
+      <div class="mobile-contact-info">
+        <p><span>Concierge:</span> <a href="tel:+12125550198">+1 (212) 555-0198</a></p>
+        <p><span>Email:</span> <a href="mailto:concierge@valenti.design">concierge@valenti.design</a></p>
+      </div>
+      <div class="mobile-admin-wrap">
+        <a href="admin.html" class="admin-link">🔒 Studio Staff Portal</a>
+      </div>
+    </div>
+  </div>
+
+  <main id="main-content">
+    <!-- Subpage Hero Header Banner -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="eyebrow">Selected Commissions</div>
+        <h1 class="page-hero-title">Portfolio of Private Works</h1>
+        <p class="page-hero-subtitle">
+          A curated glimpse into private residences, coastal sanctuaries, and boutique hospitality spaces realized across the globe.
+        </p>
+      </div>
+    </section>
+
+    <!-- CURATED PORTFOLIO SECTION -->
+    <section class="section-portfolio" id="portfolio" style="padding-top: 5rem;">
+      <div class="container">
+        <!-- Filter Navigation -->
+        <div class="portfolio-filter reveal-on-scroll reveal-fade" role="tablist" aria-label="Portfolio Category Filter">
+          <button type="button" class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All Works</button>
+          <button type="button" class="filter-btn" data-filter="penthouse" role="tab" aria-selected="false">Penthouses</button>
+          <button type="button" class="filter-btn" data-filter="villa" role="tab" aria-selected="false">Coastal Villas</button>
+          <button type="button" class="filter-btn" data-filter="townhouse" role="tab" aria-selected="false">Heritage Townhouses</button>
+          <button type="button" class="filter-btn" data-filter="hospitality" role="tab" aria-selected="false">Hospitality</button>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="portfolio-grid reveal-stagger" id="portfolio-container">
+          <!-- Project 1 -->
+          <article class="portfolio-card reveal-on-scroll parallax-img-wrap" data-category="penthouse" data-id="1">
+            <div class="portfolio-media">
+              <img src="assets/images/hero-penthouse.jpg" alt="Manhattan Double-Height Penthouse Living Room" loading="lazy" width="800" height="500" class="parallax-element">
+              <span class="portfolio-badge">Penthouse • 5,200 sq ft</span>
+            </div>
+            <div class="portfolio-details">
+              <div>
+                <h3 class="portfolio-title">The Tribeca Sky Residence</h3>
+                <p class="portfolio-location">Tribeca, New York City • 2025</p>
+              </div>
+              <div class="portfolio-view-icon" aria-hidden="true">→</div>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="portfolio-card reveal-on-scroll parallax-img-wrap" data-category="villa" data-id="2">
+            <div class="portfolio-media">
+              <img src="assets/images/project-villa.jpg" alt="Mediterranean Villa Cala Di Luna Living Room" loading="lazy" width="800" height="500" class="parallax-element">
+              <span class="portfolio-badge">Coastal Villa • 7,400 sq ft</span>
+            </div>
+            <div class="portfolio-details">
+              <div>
+                <h3 class="portfolio-title">Villa Cala Di Luna</h3>
+                <p class="portfolio-location">Mallorca, Spain • 2024</p>
+              </div>
+              <div class="portfolio-view-icon" aria-hidden="true">→</div>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="portfolio-card reveal-on-scroll parallax-img-wrap" data-category="townhouse" data-id="3">
+            <div class="portfolio-media">
+              <img src="assets/images/project-townhouse.jpg" alt="Haussmann Historic Townhouse Living Room" loading="lazy" width="800" height="500" class="parallax-element">
+              <span class="portfolio-badge">Townhouse • 4,100 sq ft</span>
+            </div>
+            <div class="portfolio-details">
+              <div>
+                <h3 class="portfolio-title">Hôtel Particulier Monceau</h3>
+                <p class="portfolio-location">8th Arrondissement, Paris • 2025</p>
+              </div>
+              <div class="portfolio-view-icon" aria-hidden="true">→</div>
+            </div>
+          </article>
+
+          <!-- Project 4 -->
+          <article class="portfolio-card reveal-on-scroll parallax-img-wrap" data-category="hospitality" data-id="4">
+            <div class="portfolio-media">
+              <img src="assets/images/project-hospitality.jpg" alt="Saint-Germain Boutique Cocktail Bar Lounge" loading="lazy" width="800" height="500" class="parallax-element">
+              <span class="portfolio-badge">Hospitality • 2,900 sq ft</span>
+            </div>
+            <div class="portfolio-details">
+              <div>
+                <h3 class="portfolio-title">L'Ambre Noir Private Members' Club</h3>
+                <p class="portfolio-location">Mayfair, London • 2024</p>
+              </div>
+              <div class="portfolio-view-icon" aria-hidden="true">→</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call To Action -->
+    <section style="padding: 5rem 0; background: var(--bg-card); text-align: center; border-top: 1px solid var(--border-subtle);">
+      <div class="container">
+        <h2 style="font-family: var(--font-editorial); font-size: var(--text-3xl); margin-bottom: 1rem;">Commission Your Private Residence</h2>
+        <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem;">Inquire regarding project availability and upcoming studio design slots.</p>
+        <a href="consultation.html" class="btn btn-gold">Inquire For Commission</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Studio Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top reveal-on-scroll reveal-fade">
+        <div class="footer-brand">
+          <span class="brand-name">VALENTI <span>&</span> CO.</span>
+          <p class="footer-desc">
+            Atelier of bespoke interior architecture and spatial curation. Designing private residences, penthouses, and hospitality spaces with uncompromising materiality.
+          </p>
+          <div class="footer-social-links" aria-label="Social Media Links">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Instagram" title="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://pinterest.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Pinterest" title="Pinterest">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.367 18.62 0 12.017 0z"/></svg>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="LinkedIn" title="LinkedIn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="YouTube" title="YouTube">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Facebook" title="Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>New York Atelier</h4>
+          <p class="text-sm text-muted">740 Fifth Avenue, 18th Floor<br>New York, NY 10019<br>T: +1 (212) 555-0198</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Paris Atelier</h4>
+          <p class="text-sm text-muted">28 Rue du Faubourg Saint-Honoré<br>75008 Paris, France<br>T: +33 1 42 68 55 00</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="philosophy.html">Philosophy</a>
+            <a href="services.html">Bespoke Services</a>
+            <a href="portfolio.html">Selected Works</a>
+            <a href="estimator.html">Scope Estimator</a>
+            <a href="admin.html" class="admin-link">Staff Admin Portal</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Valenti & Co. Architectural Interiors LLC. All Rights Reserved.</p>
+        <p>AD100 Honoree • AIA International Associate Member</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Case Study Modal for Portfolio Items -->
+  <div class="modal-backdrop" id="case-study-modal" role="dialog" aria-modal="true" aria-labelledby="modal-project-title">
+    <div class="modal-content">
+      <button type="button" class="modal-close-btn" id="modal-close-btn" aria-label="Close modal">×</button>
+      <div id="modal-body" style="padding: 2.5rem;">
+        <!-- Injected dynamically via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Radial Progress Scroll-to-Top Button -->
+  <button type="button" class="scroll-to-top" id="scroll-to-top" aria-label="Return to top of page" title="Return to Top">
+    <svg class="progress-ring" width="52" height="52" viewBox="0 0 52 52" aria-hidden="true">
+      <circle class="progress-ring__circle-bg" cx="26" cy="26" r="22" />
+      <circle class="progress-ring__circle" cx="26" cy="26" r="22" id="scroll-progress-circle" />
+    </svg>
+    <span class="scroll-to-top-arrow" aria-hidden="true">↑</span>
+  </button>
+
+  <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
